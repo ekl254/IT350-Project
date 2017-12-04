@@ -3,22 +3,18 @@
 
   require_once("functions.php");
 
-  if(check_login())
+  if(isset($_POST['search']))
   {
-    $username = $_SESSION['login'];
-    if(isset($_POST['submit']))
+    $found = array();
+    $statuses = load_data("data");
+    $keyword = strtolower($keyword);
+    for($i=0; $i<count($statuses); $i++)
     {
-      $status = $_POST['status'];
-      $date   = date("H:i m/d/Y");
-      $location = $_POST['location'];
-      $mood = $_POST['mood'];
-      $line = $username.",".$date.",".$status.",".$location.",".$mood."\r\n";
-      write_data("data", $line);
+      $strp = strpos($statuses[$i][2], $_POST['keyword']);
+      if($strp === 0 || $strp > 0) $found[count($found)] = $statuses[$i];
     }
   }
-
-  $statuses = load_data("data");
-?>
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -63,45 +59,24 @@
         </div><?php
       } ?>
       </div>
-      <div class="col-xs-10 col-xs-offset-2 content"><?php
-      if(check_login())
-      { ?>
-        <div class="col-md-5">
-          <h1>Status update</h1>
-
-          <form name = "addstatus" method="post">
-            Status update:<br> <input class="form-control" type="text" name="status"><br>
-            Location:<br> <input class="form-control" type="text" name="location"><br>
-            Mood : <select name="mood" class="form-control">
-              <option></option>
-              <option value="sad">sad</option>
-              <option value="happy">happy</option>
-              <option value="tired">tired</option>
-            </select> <br /><br />
-            <input name = "submit" class="btn btn-default" type="submit" value="Submit">
-          </form>
-
-        </div><?php
-      } ?>
-        <div class="col-md-7"><?php
-          if($statuses == NULL) echo "Couldn't open data file";
-          else
-          {
-            for($i=0; $i<count($statuses); $i++)
+      <div class="col-xs-10 col-xs-offset-2 content">
+        <form method="post" class="form-inline">
+          <input type="text" class="form-control" name="keyword">
+          <input type="submit" class="form-control" value="Search" name="search">
+        </form><?php
+            for($i=0; $i<count($found); $i++)
             { ?><blockquote style="border-color: gray;"><?php
-                echo $statuses[$i][2];
+                echo $found[$i][2];
                 echo "<hr />";
-                echo "<footer>".$statuses[$i][1].".";
-                echo "User: <a href='user.php?uname=".$statuses[$i][0]."'>".$statuses[$i][0]."</a> ";
-                echo "at ".$statuses[$i][3].". Feeling: ".$statuses[$i][4].".</footer>"; ?>
+                echo "<footer>".$found[$i][1].".";
+                echo "User: <a href='user.php?uname=".$found[$i][0]."'>".$found[$i][0]."</a> ";
+                echo "at ".$found[$i][3].". Feeling: ".$found[$i][4].".</footer>"; ?>
                 </blockquote>
               <?php
-            }
-          } ?>
-        </div>
+            } ?>
       </div>
       <div class="col-xs-offset-2 col-xs-10 footer"><h3 style="position: relative; bottom: 10px;"><a href="mailto:m203264@usna.edu">MIDN 3\C KOBYLKA</a></h3></div>
     </div>
   </body>
 
-</html>s
+</html>

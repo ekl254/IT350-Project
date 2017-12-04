@@ -3,22 +3,19 @@
 
   require_once("functions.php");
 
-  if(check_login())
+  if(isset($_POST['submit']))
   {
-    $username = $_SESSION['login'];
-    if(isset($_POST['submit']))
+    if(strlen($_POST['username']) > 2 && strlen($_POST['password']) > 4 && intval($_POST['class']) > 1845 && intval($_POST['class']) < 2050 && intval($_POST['company']) > 0 && intval($_POST['company']) <= 30)
     {
-      $status = $_POST['status'];
-      $date   = date("H:i m/d/Y");
-      $location = $_POST['location'];
-      $mood = $_POST['mood'];
-      $line = $username.",".$date.",".$status.",".$location.",".$mood."\r\n";
-      write_data("data", $line);
+      if(user_exists($_POST['username'])) { $existing = true; }
+      else
+      {
+        $line = $_POST['username'].",".$_POST['password'].",".$_POST['fullname'].",".$_POST['class'].",".$_POST['company'].",".$_POST['bio'];
+        write_data("q/credentials", $line);
+      }
     }
   }
-
-  $statuses = load_data("data");
-?>
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -63,45 +60,20 @@
         </div><?php
       } ?>
       </div>
-      <div class="col-xs-10 col-xs-offset-2 content"><?php
-      if(check_login())
-      { ?>
-        <div class="col-md-5">
-          <h1>Status update</h1>
-
-          <form name = "addstatus" method="post">
-            Status update:<br> <input class="form-control" type="text" name="status"><br>
-            Location:<br> <input class="form-control" type="text" name="location"><br>
-            Mood : <select name="mood" class="form-control">
-              <option></option>
-              <option value="sad">sad</option>
-              <option value="happy">happy</option>
-              <option value="tired">tired</option>
-            </select> <br /><br />
-            <input name = "submit" class="btn btn-default" type="submit" value="Submit">
-          </form>
-
-        </div><?php
-      } ?>
-        <div class="col-md-7"><?php
-          if($statuses == NULL) echo "Couldn't open data file";
-          else
-          {
-            for($i=0; $i<count($statuses); $i++)
-            { ?><blockquote style="border-color: gray;"><?php
-                echo $statuses[$i][2];
-                echo "<hr />";
-                echo "<footer>".$statuses[$i][1].".";
-                echo "User: <a href='user.php?uname=".$statuses[$i][0]."'>".$statuses[$i][0]."</a> ";
-                echo "at ".$statuses[$i][3].". Feeling: ".$statuses[$i][4].".</footer>"; ?>
-                </blockquote>
-              <?php
-            }
-          } ?>
-        </div>
+      <div class="col-xs-10 col-xs-offset-2 content">
+        <?php if($existing) { echo "<p class='bg-danger' style='padding: 15px; width: 75%; text-align: center; margin-left: auto; margin-right: auto; margin-top: 10px;'>User already exists</p>"; } ?>
+        <form method="POST" class="form-inline">
+          <div class="tab">Username:</div><input class="form-control" type="text" name="username"><br>
+          <div class="tab">Password:</div><input class="form-control" type="password" name="password"><br>
+          <div class="tab">Full Name:</div><input class="form-control" type="text" name="fullname"><br>
+          <div class="tab">USNA Class Year:</div> <input class="form-control" type="text" name="class"><br>
+          <div class="tab">Company:</div> <input class="form-control" type="text" name="company"><br>
+          <div class="tab">Biography:</div> <textarea class="form-control" type="text" name="bio"></textarea><br>
+          <input class="form-control" type="submit" value="Register" name="submit" />
+        </form>
       </div>
       <div class="col-xs-offset-2 col-xs-10 footer"><h3 style="position: relative; bottom: 10px;"><a href="mailto:m203264@usna.edu">MIDN 3\C KOBYLKA</a></h3></div>
     </div>
   </body>
 
-</html>s
+</html>
