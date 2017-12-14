@@ -82,24 +82,15 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
     <link type="text/css" href="../../style.css" rel="stylesheet">
-    <title>MIDN 3/C Kobylka</title>
+    <title>Profile</title>
+      <?php include("menu.php"); ?>
   </head>
 
   <body>
     <div class="container-fluid">
-      <div class="col-xs-2 menu"><?php include("menu.php"); ?></div>
+      <!-- <div class="col-xs-2 menu"><?php include("menu.php"); ?></div> -->
       <div class="col-xs-10 col-xs-offset-2 header">
-        <div class="col-xs-10"><h3>Black N Society</h3></div><?php
-        if(!check_login())
-        { ?>
-        <div class="col-xs-2" style="padding: 10px;">
-          <form action="login.php" method="POST">
-            <input class="form-control" type="text" name="login" placeholder="Username"/>
-            <input class="form-control" type="password" name="password" placeholder="Password"/>
-            <input class="form-control" type="submit" value="Login" name="submit" />
-          </form>
-        </div><?php
-      } ?>
+
       </div>
       <div class="col-xs-10 col-xs-offset-2 content"><?php
       if(!$doesntexist) { ?>
@@ -131,7 +122,7 @@
         if($statuses == NULL) echo "Couldn't open data file";
         else
         {
-          for($i=0; $i<count($statuses); $i++)
+          for($i=count($statuses)-1; $i>=0; $i--)
           {
             if($statuses[$i][0] == $_GET['uname'])
             { ?><blockquote style="border-color: gray;"><?php
@@ -148,7 +139,6 @@
       }
       else { echo "<p class='bg-danger' style='padding: 15px; width: 75%; text-align: center; margin-left: auto; margin-right: auto; margin-top: 10px;'>User does not exist. <a href='index.php' style='font-size: 12pt;'>Go back to the main page </a></p>"; } ?>
     </div>
-    <div class="col-xs-offset-2 col-xs-10 footer"><h3 style="position: relative; bottom: 10px;"><a href="mailto:m203264@usna.edu">MIDN 3\C KOBYLKA</a></h3></div>
   </div>
 </body>
 

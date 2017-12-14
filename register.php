@@ -26,7 +26,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,12 +42,13 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
     <link type="text/css" href="../../style.css" rel="stylesheet">
-    <title>MIDN 3/C Kobylka</title>
+    <title>Register</title>
+    <?php include("menu.php"); ?>
   </head>
 
   <body>
     <div class="container-fluid">
-      <div class="col-xs-2 menu"><?php include("menu.php"); ?></div>
+      <!-- <div class="col-xs-2 menu"><?php include("menu.php"); ?></div> -->
       <div class="col-xs-10 col-xs-offset-2 header">
         <div class="col-xs-10"><h3>Black N Society</h3></div><?php
         if(!isset($_SESSION['login']) || $_SESSION['login'] == "")
@@ -72,7 +74,6 @@
           <input class="form-control" type="submit" value="Register" name="submit" />
         </form>
       </div>
-      <div class="col-xs-offset-2 col-xs-10 footer"><h3 style="position: relative; bottom: 10px;"><a href="mailto:m203264@usna.edu">MIDN 3\C KOBYLKA</a></h3></div>
     </div>
   </body>
 
