@@ -17,16 +17,16 @@
 
         for($i=0; $i<count($cred); $i++)
         {
-          if($cred[0][0] == $login)
+          if($cred[$i][0] == $login)
           {
             $usercheck = true;
-            if($cred[0][1] == $password) $passcheck = true; //login and password correct
+            if($cred[$i][1] == $password) $passcheck = true; //login and password correct
             //if(md5($password) == $pass)
           }
         }
 
-    		if(!$usercheck) { echo "No such user!"; }
-    		else if(!$passcheck) { echo "Wrong password!"; }
+    		if(!$usercheck) { echo "<script type='text/javascript'>alert('No such user!');</script>"; }
+    		else if(!$passcheck) { echo "<script type='text/javascript'>alert('Wrong Password!');</script>";  }
         else
     		{
     			$_SESSION['login'] = $login;

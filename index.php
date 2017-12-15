@@ -94,7 +94,7 @@
                 echo $statuses[$i][2];
                 echo "<hr />";
                 echo "<footer>".$statuses[$i][1].".";
-                echo "User: <a href='user.php?uname=".$statuses[$i][0]."'>".$statuses[$i][0]."</a> ";
+                echo "User: <a href='profile.php?uname=".$statuses[$i][0]."'>".$statuses[$i][0]."</a> ";
                 echo "at ".$statuses[$i][3].". Feeling: ".$statuses[$i][4].".</footer>"; ?>
                 </blockquote>
               <?php

@@ -44,7 +44,7 @@ require_once("functions.php");
   <div class="container-fluid">
     <!-- <div class="col-xs-2 menu"><?php include("menu.php"); ?></div> -->
     <div class="col-xs-10 col-xs-offset-2 header">
-      <div class="col-xs-10"><h3>Black N Society</h3></div><?php
+      <?php
       if(!isset($_SESSION['login']) || $_SESSION['login'] == "")
       { ?>
         <div class="col-xs-2" style="padding: 10px;">

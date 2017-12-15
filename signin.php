@@ -1,5 +1,8 @@
 
 <html>
+<?php
+include('login.php');
+?>
 
 <head>
   <meta charset="utf-8">
@@ -28,21 +31,23 @@
   <style>
   .content {
     position: absolute;
-    left: 50%;
     top: 50%;
-    -webkit-transform: translate(-50%, -50%);
+    left: 50%;
     transform: translate(-50%, -50%);
   }
-  </style>
-  <body>
-    <div class="content" style="padding: 10px;">
-      <form action="login.php" method="POST">
-        <input class="form-control" type="text" name="login" placeholder="Username"/>
-        <input class="form-control" type="password" name="password" placeholder="Password"/>
-        <input class="form-control" type="submit" value="Login" name="submit" />
-      </form>
-    </div>
+}
+</style>
+<body>
+  <div class="content">
+    <h1>BLACK N SOCIETY</h1>
+    <form action="login.php" method="POST">
+      <input class="form-control" type="text" name="login" placeholder="Username"/>
+      <input class="form-control" type="password" name="password" placeholder="Password"/>
+      <input class="form-control" type="submit" value="Login" name="submit" />
+    </form>
+    <a href="signup.php">Sign-up</a>
+  </div>
 
-  </body>
+</body>
 
-  </html>
+</html>

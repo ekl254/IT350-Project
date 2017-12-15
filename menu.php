@@ -20,7 +20,7 @@
         <li><a href="search.php">Search</a></li>
         <li><a href="contact.php">Contact</a></li>
         <?php if(!check_login()) { echo "<li><a href='register.php'>Register</a></li>"; } ?>
-        <?php if(check_login()) { echo "<li><a href='logout.php'>Logout</a></li>"; } ?>
+        <?php if(check_login()) { echo "<li><a href='signin.php'>Logout</a></li>"; } ?>
       </ul>
     </div>
 
